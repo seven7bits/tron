@@ -1,6 +1,6 @@
 TRON.KEYBOARD = function() {
 
-	this.keys = {
+	var keys = this.keys = {
 		'backspace': 	8,
 		'tab': 			9,
 		'enter': 		13,
@@ -51,14 +51,17 @@ TRON.KEYBOARD = function() {
 
 	this.keyArray = [];
 
+	var keyEvent = function(state, keyCode) {
+		var e = $.Event(state);
+		e.which = keyCode;
+		return e;
+	}
+
 	this.setKeyState = function(keyName, isPressed) {
 		if (isPressed) {
-			console.log(keys[keyName].code);
-			$(document).trigger(keyEvent("keydown", keys[keyName].code));
-			keys[keyName].isPressed = true;
+			$(document).trigger(keyEvent("keydown", keys[keyName]));
 		} else {
-			$(document).trigger(keyEvent("keyup", keys[keyName].code));
-			keys[keyName].isPressed = false;
+			$(document).trigger(keyEvent("keyup", keys[keyName]));
 		}
 	};
 };
@@ -88,44 +91,6 @@ TRON.KEYBOARD.prototype = {
 				callback();
 			};
 		});
-	},
-	adapter: function(keyName, state) {
-		keyName = keyName.toLowerCase();
-
-		var pressKey = (state == 1 ? true : false);
-
-		switch (keyName) {
-			case 'left':
-				this.setKeyState('left_arrow', pressKey);
-				break;
-			case 'right':
-				this.setKeyState('right_arrow', pressKey);
-				break;
-			case 'up':
-				this.setKeyState('up_arrow', pressKey);
-				break;
-			case 'down':
-				this.setKeyState('down_arrow', pressKey);
-				break;
-			case 'start':
-				this.setKeyState('enter', pressKey);
-				break;
-			case 'left1':
-				this.setKeyState('3', pressKey);
-				break;
-			case 'right1':
-				this.setKeyState('1', pressKey);
-				break;
-			case 'up1':
-				this.setKeyState('0', pressKey);
-				break;
-			case 'down1':
-				this.setKeyState('2', pressKey);
-				break;
-			case 'start1':
-				this.setKeyState('enter', pressKey);
-			break;
-		};
 	}
 };
 

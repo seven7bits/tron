@@ -1,63 +1,55 @@
-<!DOCTYPE html>
+<div id="canvas-wraper">
+	<canvas id="canvas"></canvas>
+</div>
 
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>test</title>
-        
-        <link href="tron.css" rel="stylesheet" />
-        
+<script src="/js/games/tron/jquery-1.10.2.min.js"></script>
+<script src="/js/games/tron/tron.js"></script>
+<script src="/js/games/tron/ingine.js"></script>
+<script src="/js/games/tron/launcher.js"></script>
+<script src="/js/games/tron/keyboard.js"></script>
+<script src="/js/games/tron/RequestAnimationFrame.js"></script>
+<script src="/js/games/tron/player.js"></script>
+<script src="/js/games/tron/map.js"></script>
 
-        
+<script>
+	var tron = new TRON();
+	tron.start();
 
-    </head>
-    <body>
+	window.tronkey =  function(keyName, state) {
+		keyName = keyName.toLowerCase();
+		var pressKey = (state == 1 ? true : false);
+		switch (keyName) {
+			case 'left':
+				tron.ingine.keyboard.setKeyState('left_arrow', pressKey);
+				break;
+			case 'right':
+				tron.ingine.keyboard.setKeyState('right_arrow', pressKey);
+				break;
+			case 'up':
+				tron.ingine.keyboard.setKeyState('up_arrow', pressKey);
+				break;
+			case 'down':
+				tron.ingine.keyboard.setKeyState('down_arrow', pressKey);
+				break;
+			case 'start':
+				tron.ingine.keyboard.setKeyState('enter', pressKey);
+				break;
+			case 'left1':
+				tron.ingine.keyboard.setKeyState('4', pressKey);
+				break;
+			case 'right1':
+				tron.ingine.keyboard.setKeyState('2', pressKey);
+				break;
+			case 'up1':
+				tron.ingine.keyboard.setKeyState('1', pressKey);
+				break;
+			case 'down1':
+				tron.ingine.keyboard.setKeyState('3', pressKey);
+				break;
+			case 'start1':
+				tron.ingine.keyboard.setKeyState('enter', pressKey);
+			break;
+		};
+	}
 
-        <div id="canvas-wraper">
-            <canvas id="canvas">
-                
-            </canvas>
-        </div>
-        
-      <script src="jquery-1.10.2.min.js"></script>
-      <script src="tron.js"></script>
-        <script src="ingine.js"></script>
-        
-        <script src="launcher.js"></script>
-
-        <script src="keyboard.js"></script>
-        <script src="RequestAnimationFrame.js"></script>
-        <script src="player.js"></script>
-        <script src="map.js"></script>
-
-
-        
-
-        
-
-        <script>
-            var tron = new TRON();
-
-            tron.start();
-
-            if ( !window.requestAnimationFrame ) {
-
-                window.requestAnimationFrame = ( function() {
-
-                    return window.webkitRequestAnimationFrame ||
-                    window.mozRequestAnimationFrame || // comment out if FF4 is slow (it caps framerate at ~30fps: https://bugzilla.mozilla.org/show_bug.cgi?id=630127)
-                    window.oRequestAnimationFrame ||
-                    window.msRequestAnimationFrame ||
-                    function( /* function FrameRequestCallback */ callback, /* DOMElement Element */ element ) {
-
-                        window.setTimeout( callback, 1000 / 60 );
-
-                    };
-
-                } )();
-
-            }
-        </script>
-
-    </body>
-</html>
+</script>

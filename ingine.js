@@ -184,7 +184,7 @@ TRON.INGINE.prototype = {
     	var self = this;
     	this.timer = setInterval(function(){
     		self.checkGame();
-    	}, 35);
+    	}, 300);
 
     	self.keyboard.subscribe("enter", function(){
 			
