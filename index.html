@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>test</title>
+        
+        <link href="tron.css" rel="stylesheet" />
+        
+
+        
+
+    </head>
+    <body>
+
+        <div id="canvas-wraper">
+            <canvas id="canvas">
+                
+            </canvas>
+        </div>
+        
+      <script src="jquery-1.10.2.min.js"></script>
+      <script src="tron.js"></script>
+        <script src="ingine.js"></script>
+        
+        <script src="launcher.js"></script>
+
+        <script src="keyboard.js"></script>
+        <script src="RequestAnimationFrame.js"></script>
+        <script src="player.js"></script>
+        <script src="map.js"></script>
+
+
+        
+
+        
+
+        <script>
+            var tron = new TRON();
+
+            tron.start();
+
+            if ( !window.requestAnimationFrame ) {
+
+                window.requestAnimationFrame = ( function() {
+
+                    return window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame || // comment out if FF4 is slow (it caps framerate at ~30fps: https://bugzilla.mozilla.org/show_bug.cgi?id=630127)
+                    window.oRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    function( /* function FrameRequestCallback */ callback, /* DOMElement Element */ element ) {
+
+                        window.setTimeout( callback, 1000 / 60 );
+
+                    };
+
+                } )();
+
+            }
+        </script>
+
+    </body>
+</html>
